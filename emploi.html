@@ -1,146 +1,153 @@
-<!DOCTYPE html>
+
+       <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emploi du Temps Complet - PRONOTE</title>
+    <title>PRONOTE | Emploi du temps complet</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="light-mode">
+
     <aside class="sidebar">
-        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> PRONOTE</div>
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> <span>PRONOTE</span></div>
         <nav>
             <ul>
-                <li onclick="location.href='index.html'"><i class="fa-solid fa-house"></i> Accueil</li>
-                <li class="active"><i class="fa-solid fa-calendar-days"></i> Emploi du temps</li>
-                <li><i class="fa-solid fa-star"></i> Notes</li>
-                <li><i class="fa-solid fa-book"></i> Agenda</li>
-                <li><i class="fa-solid fa-gear"></i> Réglages</li>
+                <li><a href="index.html" class="menu-link"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                <li class="active"><a href="emploi.html" class="menu-link"><i class="fa-solid fa-calendar-days"></i> Emploi du temps</a></li>
+                <li><a href="notes.html" class="menu-link"><i class="fa-solid fa-star"></i> Notes</a></li>
+                <li><a href="agenda.html" class="menu-link"><i class="fa-solid fa-book"></i> Agenda</a></li>
+                <li><a href="reglages.html" class="menu-link"><i class="fa-solid fa-gear"></i> Réglages</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
         <header>
-            <h2>Emploi du temps - Semaine du 29 Sept.</h2>
+            <div class="welcome-msg">
+                <h1>Emploi du temps</h1>
+                <p>Semaine complète - Septembre/Octobre</p>
+            </div>
         </header>
 
-        <div class="timetable-container card">
-            <table class="timetable">
+        <div class="timetable-wrapper card">
+            <table class="modern-table">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>lun. 29 sept.</th>
-                        <th>mar. 30 sept.</th>
-                        <th>mer. 01 oct.</th>
-                        <th>jeu. 02 oct.</th>
-                        <th>ven. 03 oct.</th>
+                        <th>Heure</th>
+                        <th>lun. 29</th>
+                        <th>mar. 30</th>
+                        <th>mer. 01</th>
+                        <th>jeu. 02</th>
+                        <th>ven. 03</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="hour">08h00</td>
-                        <td class="subject tech" onclick="showInfo('TECHNOLOGIE', 'M. Martin', 'S102')">TECHNOLOGIE</td>
-                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
-                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
-                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
-                        <td class="empty">——</td>
+                        <td class="time-col">08h00</td>
+                        <td class="cell tech" onclick="pop('TECHNOLOGIE', 'M. Martin', 'S102')">TECH</td>
+                        <td class="cell fr" onclick="pop('FRANCAIS', 'Mme Durand', 'S201')">FRAN</td>
+                        <td class="cell math" onclick="pop('MATHS', 'M. Petit', 'S105')">MATH</td>
+                        <td class="cell math" onclick="pop('MATHS', 'M. Petit', 'S105')">MATH</td>
+                        <td class="cell empty">--</td>
                     </tr>
                     <tr>
-                        <td class="hour">09h00</td>
-                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
-                        <td class="subject tech" onclick="showInfo('TECHNOLOGIE', 'M. Martin', 'S102')">TECHNOLOGIE</td>
-                        <td class="subject music" onclick="showInfo('ED. MUSICALE', 'Mme Melodie', 'Studio')">EDUCATION MUSICALE</td>
-                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
-                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
+                        <td class="time-col">09h00</td>
+                        <td class="cell math" onclick="pop('MATHS', 'M. Petit', 'S105')">MATH</td>
+                        <td class="cell tech" onclick="pop('TECHNOLOGIE', 'M. Martin', 'S102')">TECH</td>
+                        <td class="cell music" onclick="pop('ED. MUSICALE', 'Mme Melodie', 'Studio')">MUSI</td>
+                        <td class="cell fr" onclick="pop('FRANCAIS', 'Mme Durand', 'S201')">FRAN</td>
+                        <td class="cell ang" onclick="pop('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGL</td>
                     </tr>
                     <tr>
-                        <td class="hour">10h10</td>
-                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
-                        <td class="subject phys" onclick="showInfo('PHYSIQUE-CHIMIE', 'M. Atome', 'Labo 1')">PHYSIQUE-CHIMIE</td>
-                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
-                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
-                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
+                        <td class="time-col">10h10</td>
+                        <td class="cell fr" onclick="pop('FRANCAIS', 'Mme Durand', 'S201')">FRAN</td>
+                        <td class="cell phys" onclick="pop('PHYSIQUE', 'M. Atome', 'Labo 1')">PHYS</td>
+                        <td class="cell fr" onclick="pop('FRANCAIS', 'Mme Durand', 'S201')">FRAN</td>
+                        <td class="cell ang" onclick="pop('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGL</td>
+                        <td class="cell eps" onclick="pop('EPS', 'M. Muscle', 'Gymnase')">EPS</td>
                     </tr>
                     <tr>
-                        <td class="hour">11h05</td>
-                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
-                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
-                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
-                        <td class="subject svt" onclick="showInfo('SVT', 'M. Vivant', 'Labo 2')">SCIENCES VIE & TERRE</td>
-                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="time-col">11h05</td>
+                        <td class="cell hg" onclick="pop('HISTOIRE-GEO', 'Mme Terre', 'S205')">H-G</td>
+                        <td class="cell math" onclick="pop('MATHS', 'M. Petit', 'S105')">MATH</td>
+                        <td class="cell esp" onclick="pop('ESPAGNOL', 'Mme Garcia', 'S108')">ESPA</td>
+                        <td class="cell svt" onclick="pop('SVT', 'M. Vivant', 'Labo 2')">SVT</td>
+                        <td class="cell hg" onclick="pop('HISTOIRE-GEO', 'Mme Terre', 'S205')">H-G</td>
                     </tr>
                     <tr>
-                        <td class="hour">12h05</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
+                        <td class="time-col">12h05</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
                     </tr>
                     <tr>
-                        <td class="hour">13h30</td>
-                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
-                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
-                        <td class="empty">——</td>
-                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
-                        <td class="subject arts" onclick="showInfo('ARTS PLASTIQUES', 'Mme Palette', 'Atelier')">ARTS PLASTIQUES</td>
+                        <td class="time-col">13h30</td>
+                        <td class="cell ang" onclick="pop('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGL</td>
+                        <td class="cell eps" onclick="pop('EPS', 'M. Muscle', 'Gymnase')">EPS</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell esp" onclick="pop('ESPAGNOL', 'Mme Garcia', 'S108')">ESPA</td>
+                        <td class="cell arts" onclick="pop('ARTS PLASTIQUES', 'Mme Palette', 'Atelier')">ARTS</td>
                     </tr>
                     <tr>
-                        <td class="hour">14h30</td>
-                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
-                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
-                        <td class="empty">——</td>
-                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
-                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="time-col">14h30</td>
+                        <td class="cell fr" onclick="pop('FRANCAIS', 'Mme Durand', 'S201')">FRAN</td>
+                        <td class="cell eps" onclick="pop('EPS', 'M. Muscle', 'Gymnase')">EPS</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell hg" onclick="pop('HISTOIRE-GEO', 'Mme Terre', 'S205')">H-G</td>
+                        <td class="cell hg" onclick="pop('HISTOIRE-GEO', 'Mme Terre', 'S205')">H-G</td>
                     </tr>
                     <tr>
-                        <td class="hour">15h35</td>
-                        <td class="subject svt" onclick="showInfo('SVT', 'M. Vivant', 'Labo 2')">SCIENCES VIE & TERRE</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
+                        <td class="time-col">15h35</td>
+                        <td class="cell svt" onclick="pop('SVT', 'M. Vivant', 'Labo 2')">SVT</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell esp" onclick="pop('ESPAGNOL', 'Mme Garcia', 'S108')">ESPA</td>
                     </tr>
                     <tr>
-                        <td class="hour">16h35</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
-                        <td class="empty">——</td>
+                        <td class="time-col">16h35</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
+                        <td class="cell empty">--</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div id="info-modal" class="modal">
-            <div class="modal-content card">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2 id="modal-subject">Sujet</h2>
-                <div class="modal-body">
-                    <p><i class="fa-solid fa-user-tie"></i> <strong>Professeur:</strong> <span id="modal-prof"></span></p>
-                    <p><i class="fa-solid fa-location-dot"></i> <strong>Salle:</strong> <span id="modal-salle"></span></p>
+        <div id="modal-info" class="modern-modal">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2 id="m-title">Matière</h2>
                 </div>
+                <div class="modal-body">
+                    <div class="m-detail"><i class="fa-solid fa-user-tie"></i> <span id="m-prof">Prof</span></div>
+                    <div class="m-detail"><i class="fa-solid fa-location-dot"></i> <span id="m-salle">Salle</span></div>
+                </div>
+                <button onclick="closePop()" class="btn-mode" style="margin-top:20px; width:100%">Fermer</button>
             </div>
         </div>
     </main>
 
     <script>
-        function showInfo(subject, prof, salle) {
-            document.getElementById('modal-subject').innerText = subject;
-            document.getElementById('modal-prof').innerText = prof;
-            document.getElementById('modal-salle').innerText = salle;
-            document.getElementById('info-modal').style.display = "block";
+        function pop(title, prof, salle) {
+            document.getElementById('m-title').innerText = title;
+            document.getElementById('m-prof').innerText = prof;
+            document.getElementById('m-salle').innerText = salle;
+            document.getElementById('modal-info').classList.add('active');
         }
-        function closeModal() {
-            document.getElementById('info-modal').style.display = "none";
+        function closePop() {
+            document.getElementById('modal-info').classList.remove('active');
         }
+        // Fermer en cliquant à côté
         window.onclick = function(event) {
-            if (event.target == document.getElementById('info-modal')) {
-                closeModal();
-            }
+            let modal = document.getElementById('modal-info');
+            if (event.target == modal) closePop();
         }
     </script>
 </body>
