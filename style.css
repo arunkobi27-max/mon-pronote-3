@@ -123,3 +123,30 @@ header {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Couleurs spécifiques basées sur ton image */
+.tech { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
+.math { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
+.fr { background-color: #e1f0f7 !important; color: #2c527a; }   /* Bleu très clair */
+.phys { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
+.hg { background-color: #92abb5 !important; color: #233a45; }   /* Bleu gris */
+.music { background-color: #f7e68e !important; color: #5c4e10; } /* Jaune */
+.ang { background-color: #d199a4 !important; color: #5c1a26; }  /* Rose/Rouge */
+.esp { background-color: #f2c0bd !important; color: #7a2b26; }  /* Rose clair */
+.svt { background-color: #c9d991 !important; color: #3d4a15; }  /* Vert clair */
+.eps { background-color: #e5dac1 !important; color: #5c4a2a; }  /* Beige */
+.arts { background-color: #f2d07e !important; color: #6e4e0a; } /* Orange/Jaune */
+
+.empty { background-color: #dfdfdf !important; color: #999; }   /* Cases vides */
+
+/* Style du tableau pour qu'il soit plus compact */
+.timetable td {
+    padding: 8px;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.modal-body {
+    text-align: left;
+    margin-top: 20px;
+}
