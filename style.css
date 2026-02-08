@@ -1,0 +1,125 @@
+:root {
+    --bg-color: #f4f7f6;
+    --sidebar-color: #ffffff;
+    --text-color: #333;
+    --accent-color: #009688;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Couleurs Mode Nuit */
+.dark-mode {
+    --bg-color: #1a1a1a;
+    --sidebar-color: #2d2d2d;
+    --text-color: #e0e0e0;
+    --accent-color: #4db6ac;
+    --card-bg: #333333;
+    --shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Sidebar moderne */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-color);
+    height: 100vh;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 40px;
+}
+
+nav ul { list-style: none; padding: 0; }
+nav li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+nav li i { margin-right: 10px; width: 20px; }
+nav li:hover { background: rgba(0,150,136, 0.1); color: var(--accent-color); }
+nav li.active { background: var(--accent-color); color: white; }
+
+/* Contenu principal */
+.content {
+    flex: 1;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.search-bar input {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    width: 300px;
+    box-shadow: var(--shadow);
+}
+
+.avatar { border-radius: 50%; border: 2px solid var(--accent-color); }
+
+/* Grille de cartes */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.card h3 { color: var(--accent-color); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+
+.item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Image de décoration en arrière-plan */
+.bg-decoration {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 400px;
+    height: 400px;
+    background-image: url('https://www.transparentpng.com/download/school-supplies/books-pencil-back-to-school-png-images-12.png'); /* Image éducation */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1; /* Très discret */
+    pointer-events: none;
+}
+
+.btn-toggle {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
