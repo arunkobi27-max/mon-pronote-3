@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emploi du Temps Complet - PRONOTE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <aside class="sidebar">
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> PRONOTE</div>
+        <nav>
+            <ul>
+                <li onclick="location.href='index.html'"><i class="fa-solid fa-house"></i> Accueil</li>
+                <li class="active"><i class="fa-solid fa-calendar-days"></i> Emploi du temps</li>
+                <li><i class="fa-solid fa-star"></i> Notes</li>
+                <li><i class="fa-solid fa-book"></i> Agenda</li>
+                <li><i class="fa-solid fa-gear"></i> Réglages</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header>
+            <h2>Emploi du temps - Semaine du 29 Sept.</h2>
+        </header>
+
+        <div class="timetable-container card">
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>lun. 29 sept.</th>
+                        <th>mar. 30 sept.</th>
+                        <th>mer. 01 oct.</th>
+                        <th>jeu. 02 oct.</th>
+                        <th>ven. 03 oct.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="hour">08h00</td>
+                        <td class="subject tech" onclick="showInfo('TECHNOLOGIE', 'M. Martin', 'S102')">TECHNOLOGIE</td>
+                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
+                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
+                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
+                        <td class="empty">——</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">09h00</td>
+                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
+                        <td class="subject tech" onclick="showInfo('TECHNOLOGIE', 'M. Martin', 'S102')">TECHNOLOGIE</td>
+                        <td class="subject music" onclick="showInfo('ED. MUSICALE', 'Mme Melodie', 'Studio')">EDUCATION MUSICALE</td>
+                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
+                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">10h10</td>
+                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
+                        <td class="subject phys" onclick="showInfo('PHYSIQUE-CHIMIE', 'M. Atome', 'Labo 1')">PHYSIQUE-CHIMIE</td>
+                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
+                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
+                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">11h05</td>
+                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="subject math" onclick="showInfo('MATHEMATIQUES', 'M. Petit', 'S105')">MATHEMATIQUES</td>
+                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
+                        <td class="subject svt" onclick="showInfo('SVT', 'M. Vivant', 'Labo 2')">SCIENCES VIE & TERRE</td>
+                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">12h05</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">13h30</td>
+                        <td class="subject ang" onclick="showInfo('ANGLAIS LV1', 'Mme Smith', 'S304')">ANGLAIS LV1</td>
+                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
+                        <td class="empty">——</td>
+                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
+                        <td class="subject arts" onclick="showInfo('ARTS PLASTIQUES', 'Mme Palette', 'Atelier')">ARTS PLASTIQUES</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">14h30</td>
+                        <td class="subject fr" onclick="showInfo('FRANCAIS', 'Mme Durand', 'S201')">FRANCAIS</td>
+                        <td class="subject eps" onclick="showInfo('ED.PHYSIQUE & SPORT', 'M. Muscle', 'Gymnase')">ED.PHYSIQUE & SPORT.</td>
+                        <td class="empty">——</td>
+                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="subject hg" onclick="showInfo('HISTOIRE-GEOGRAPHIE', 'Mme Terre', 'S205')">HISTOIRE-GEOGRAPHIE</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">15h35</td>
+                        <td class="subject svt" onclick="showInfo('SVT', 'M. Vivant', 'Labo 2')">SCIENCES VIE & TERRE</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="subject esp" onclick="showInfo('ESPAGNOL LV2', 'Mme Garcia', 'S108')">ESPAGNOL LV2</td>
+                    </tr>
+                    <tr>
+                        <td class="hour">16h35</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                        <td class="empty">——</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="info-modal" class="modal">
+            <div class="modal-content card">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-subject">Sujet</h2>
+                <div class="modal-body">
+                    <p><i class="fa-solid fa-user-tie"></i> <strong>Professeur:</strong> <span id="modal-prof"></span></p>
+                    <p><i class="fa-solid fa-location-dot"></i> <strong>Salle:</strong> <span id="modal-salle"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showInfo(subject, prof, salle) {
+            document.getElementById('modal-subject').innerText = subject;
+            document.getElementById('modal-prof').innerText = prof;
+            document.getElementById('modal-salle').innerText = salle;
+            document.getElementById('info-modal').style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById('info-modal').style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('info-modal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
