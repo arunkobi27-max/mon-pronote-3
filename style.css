@@ -130,3 +130,88 @@ header {
     opacity: 0.15;
     z-index: -1;
 }
+
+/* Couleurs Matières - Style Moderne Pastel */
+.tech, .math, .phys { background-color: #a2c4a4 !important; color: #1e3a20; }
+.fr { background-color: #e1f0f7 !important; color: #2c527a; }
+.hg { background-color: #92abb5 !important; color: #fff; }
+.music { background-color: #f7e68e !important; color: #5c4e10; }
+.ang { background-color: #d199a4 !important; color: #5c1a26; }
+.esp { background-color: #f2c0bd !important; color: #7a2b26; }
+.svt { background-color: #c9d991 !important; color: #3d4a15; }
+.eps { background-color: #e5dac1 !important; color: #5c4a2a; }
+.arts { background-color: #f2d07e !important; color: #6e4e0a; }
+.empty { background-color: rgba(0,0,0,0.05) !important; color: transparent; border: 1px dashed #ccc !important; }
+
+/* Correction pour le texte des cellules */
+.cell {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Container de l'emploi du temps pour voir tout sur mobile */
+.timetable-wrapper {
+    overflow-x: auto;
+    padding: 10px !important;
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+    min-width: 600px; /* Force l'affichage pour ne pas tout écraser */
+}
+
+.modern-table th {
+    padding: 15px;
+    color: var(--text-sub);
+    font-weight: 600;
+    text-align: center;
+}
+
+.cell {
+    padding: 20px 10px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.cell:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.time-col { font-weight: bold; color: var(--primary); width: 80px; }
+
+/* Styles du Pop-up Moderne */
+.modern-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(5px); /* Flou d'arrière-plan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.modern-modal.active { opacity: 1; pointer-events: auto; }
+
+.modal-card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    width: 300px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.m-detail { margin: 10px 0; color: var(--text-sub); font-size: 1.1em; }
