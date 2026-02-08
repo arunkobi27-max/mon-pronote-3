@@ -1,152 +1,132 @@
 :root {
-    --bg-color: #f4f7f6;
-    --sidebar-color: #ffffff;
-    --text-color: #333;
-    --accent-color: #009688;
+    --bg-body: #f0f2f5;
+    --bg-side: #ffffff;
+    --primary: #009688;
+    --primary-light: rgba(0, 150, 136, 0.1);
+    --text-main: #2d3436;
+    --text-sub: #636e72;
     --card-bg: #ffffff;
-    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow: 0 10px 30px rgba(0,0,0,0.05);
+    --radius: 16px;
 }
 
-/* Couleurs Mode Nuit */
 .dark-mode {
-    --bg-color: #1a1a1a;
-    --sidebar-color: #2d2d2d;
-    --text-color: #e0e0e0;
-    --accent-color: #4db6ac;
-    --card-bg: #333333;
-    --shadow: 0 4px 12px rgba(0,0,0,0.5);
+    --bg-body: #121212;
+    --bg-side: #1e1e1e;
+    --text-main: #ffffff;
+    --text-sub: #b2bec3;
+    --card-bg: #2d2d2d;
+    --shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
     display: flex;
-    background-color: var(--bg-color);
-    color: var(--text-color);
     transition: all 0.3s ease;
 }
 
-/* Sidebar moderne */
+/* Sidebar stylisée */
 .sidebar {
-    width: 260px;
-    background-color: var(--sidebar-color);
+    width: 280px;
+    background: var(--bg-side);
     height: 100vh;
-    padding: 20px;
+    padding: 30px 20px;
     box-shadow: var(--shadow);
-    z-index: 10;
+    position: sticky;
+    top: 0;
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--accent-color);
-    margin-bottom: 40px;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 nav ul { list-style: none; padding: 0; }
-nav li {
-    padding: 12px 15px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.2s;
+nav li { margin-bottom: 10px; }
+
+.menu-link {
+    text-decoration: none;
+    color: var(--text-sub);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: var(--radius);
+    font-weight: 500;
+    transition: 0.3s;
 }
 
-nav li i { margin-right: 10px; width: 20px; }
-nav li:hover { background: rgba(0,150,136, 0.1); color: var(--accent-color); }
-nav li.active { background: var(--accent-color); color: white; }
-
-/* Contenu principal */
-.content {
-    flex: 1;
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
+.menu-link:hover, .active .menu-link {
+    background: var(--primary-light);
+    color: var(--primary);
 }
+
+.active .menu-link { background: var(--primary); color: white; }
+
+/* Main Content */
+.content { flex: 1; padding: 40px; }
 
 header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
-.search-bar input {
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    width: 300px;
-    box-shadow: var(--shadow);
-}
+.welcome-msg h1 { margin: 0; font-size: 28px; }
+.welcome-msg p { color: var(--text-sub); margin-top: 5px; }
 
-.avatar { border-radius: 50%; border: 2px solid var(--accent-color); }
-
-/* Grille de cartes */
-.grid-container {
+/* Cards Layout */
+.grid-dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
 
 .card {
     background: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 25px;
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.02);
+    transition: transform 0.3s ease;
 }
 
-.card h3 { color: var(--accent-color); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+.card:hover { transform: translateY(-5px); }
 
-.item {
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+.card h3 { 
+    margin-top: 0; 
+    font-size: 18px; 
+    display: flex; 
+    justify-content: space-between;
+    color: var(--primary);
 }
 
-/* Image de décoration en arrière-plan */
-.bg-decoration {
-    position: absolute;
-    bottom: -50px;
-    right: -50px;
-    width: 400px;
-    height: 400px;
-    background-image: url('https://www.transparentpng.com/download/school-supplies/books-pencil-back-to-school-png-images-12.png'); /* Image éducation */
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.1; /* Très discret */
-    pointer-events: none;
-}
-
-.btn-toggle {
-    background: var(--accent-color);
+/* Boutons Modernes */
+.btn-mode {
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 50px;
     cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,150,136, 0.3);
 }
 
-/* Couleurs spécifiques basées sur ton image */
-.tech { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
-.math { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
-.fr { background-color: #e1f0f7 !important; color: #2c527a; }   /* Bleu très clair */
-.phys { background-color: #a2c4a4 !important; color: #1e3a20; } /* Vert */
-.hg { background-color: #92abb5 !important; color: #233a45; }   /* Bleu gris */
-.music { background-color: #f7e68e !important; color: #5c4e10; } /* Jaune */
-.ang { background-color: #d199a4 !important; color: #5c1a26; }  /* Rose/Rouge */
-.esp { background-color: #f2c0bd !important; color: #7a2b26; }  /* Rose clair */
-.svt { background-color: #c9d991 !important; color: #3d4a15; }  /* Vert clair */
-.eps { background-color: #e5dac1 !important; color: #5c4a2a; }  /* Beige */
-.arts { background-color: #f2d07e !important; color: #6e4e0a; } /* Orange/Jaune */
-
-.empty { background-color: #dfdfdf !important; color: #999; }   /* Cases vides */
-
-/* Style du tableau pour qu'il soit plus compact */
-.timetable td {
-    padding: 8px;
-    font-weight: 500;
-    border: 1px solid rgba(255,255,255,0.3);
-}
-
-.modal-body {
-    text-align: left;
-    margin-top: 20px;
+.bg-decoration {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 250px;
+    opacity: 0.15;
+    z-index: -1;
 }
