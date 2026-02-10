@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRONOTE | Mes Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+
+    <aside class="sidebar">
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> <span>PRONOTE</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="menu-link"><i class="fa-solid fa-house"></i> Accueil</a></li>
+                <li><a href="emploi.html" class="menu-link"><i class="fa-solid fa-calendar-days"></i> Emploi du temps</a></li>
+                <li class="active"><a href="notes.html" class="menu-link"><i class="fa-solid fa-star"></i> Notes</a></li>
+                <li><a href="agenda.html" class="menu-link"><i class="fa-solid fa-book"></i> Agenda</a></li>
+                <li><a href="reglages.html" class="menu-link"><i class="fa-solid fa-gear"></i> Réglages</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header>
+            <div class="welcome-msg">
+                <h1>Mes Notes</h1>
+                <p>Calculateur de moyenne en temps réel</p>
+            </div>
+            <div class="overall-average-card">
+                Moyenne Générale : <span id="general-average">--</span>/20
+            </div>
+        </header>
+
+        <div class="grid-dashboard">
+            <div class="card note-card">
+                <h3>Mathématiques</h3>
+                <div class="input-group">
+                    <input type="number" class="note-input" placeholder="Note 1" oninput="calculateMoyenne()">
+                    <input type="number" class="note-input" placeholder="Note 2" oninput="calculateMoyenne()">
+                </div>
+                <div class="moyenne-display">Moyenne : <span class="sub-moy">--</span></div>
+            </div>
+
+            <div class="card note-card">
+                <h3>Français</h3>
+                <div class="input-group">
+                    <input type="number" class="note-input" placeholder="Note 1" oninput="calculateMoyenne()">
+                    <input type="number" class="note-input" placeholder="Note 2" oninput="calculateMoyenne()">
+                </div>
+                <div class="moyenne-display">Moyenne : <span class="sub-moy">--</span></div>
+            </div>
+
+            <div class="card note-card">
+                <h3>Anglais</h3>
+                <div class="input-group">
+                    <input type="number" class="note-input" placeholder="Note 1" oninput="calculateMoyenne()">
+                    <input type="number" class="note-input" placeholder="Note 2" oninput="calculateMoyenne()">
+                </div>
+                <div class="moyenne-display">Moyenne : <span class="sub-moy">--</span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function calculateMoyenne() {
+            const cards = document.querySelectorAll('.note-card');
+            let totalGeneral = 0;
+            let countMatiere = 0;
+
+            cards.forEach(card => {
+                const inputs = card.querySelectorAll('.note-input');
+                let sum = 0;
+                let count = 0;
+
+                inputs.forEach(input => {
+                    if (input.value !== "") {
+                        sum += parseFloat(input.value);
+                        count++;
+                    }
+                });
+
+                const display = card.querySelector('.sub-moy');
+                if (count > 0) {
+                    let moy = sum / count;
+                    display.innerText = moy.toFixed(2);
+                    totalGeneral += moy;
+                    countMatiere++;
+                } else {
+                    display.innerText = "--";
+                }
+            });
+
+            const generalDisplay = document.getElementById('general-average');
+            if (countMatiere > 0) {
+                generalDisplay.innerText = (totalGeneral / countMatiere).toFixed(2);
+                generalDisplay.parentElement.style.background = "var(--primary)";
+                generalDisplay.parentElement.style.color = "white";
+            } else {
+                generalDisplay.innerText = "--";
+            }
+        }
+    </script>
+</body>
+</html>
