@@ -243,3 +243,16 @@ input[type="number"] {
     font-weight: bold;
     color: #333;
 }
+
+/* Styles Réglages */
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.info-row input[type="text"] {
+    font-family: inherit;
+    color: #333;
+    width: 150px;
+}
