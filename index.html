@@ -2,65 +2,59 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRONOTE | Dashboard</title>
+    <title>PRONOTE | Accueil</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="light-mode">
-
+<body>
     <aside class="sidebar">
-        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> <span>PRONOTE</span></div>
+        <div class="logo">PRONOTE</div>
         <nav>
             <ul>
-                <li class="active"><a href="index.html" class="menu-link"><i class="fa-solid fa-house"></i> Accueil</a></li>
-                <li><a href="emploi.html" class="menu-link"><i class="fa-solid fa-calendar-days"></i> Emploi du temps</a></li>
-                <li><a href="notes.html" class="menu-link"><i class="fa-solid fa-star"></i> Notes</a></li>
-                <li><a href="agenda.html" class="menu-link"><i class="fa-solid fa-book"></i> Agenda</a></li>
-                <li><a href="carnet.html" class="menu-link"><i class="fa-solid fa-address-book"></i> Carnet</a></li>
-                <li><a href="profil.html" class="menu-link"><i class="fa-solid fa-user"></i> Profil</a></li>
-                <li><a href="reglages.html" class="menu-link"><i class="fa-solid fa-gear"></i> Réglages</a></li>
+                <li class="active"><a href="index.html" class="menu-link">🏠 Accueil</a></li>
+                <li><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
+                <li><a href="notes.html" class="menu-link">📊 Notes</a></li>
+                <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
-        <header>
-            <div class="welcome-msg">
-                <h1>Bonjour, Jean ! 👋</h1>
-                <p>Voici un résumé de ta journée scolaire.</p>
-            </div>
-            <button onclick="toggleDarkMode()" class="btn-mode">🌓 Mode Nuit</button>
-        </header>
-
-        <div class="grid-dashboard">
-            <div class="card">
-                <h3>Dernières Notes <i class="fa-solid fa-chart-line"></i></h3>
-                <div class="item"><strong>Maths</strong> <span>18.5/20</span></div>
-                <div class="item"><strong>Français</strong> <span>14/20</span></div>
-                <a href="notes.html" style="color: var(--primary); font-size: 12px; text-decoration: none;">Voir tout →</a>
-            </div>
-
-            <div class="card">
-                <h3>Devoirs à faire <i class="fa-solid fa-clock"></i></h3>
-                <div class="item">📝 DM de SVT <small>(pour demain)</small></div>
-                <div class="item">📖 Lecture Anglais <small>(pour vendredi)</small></div>
-            </div>
-
-            <div class="card" style="background: var(--primary); color: white;">
-                <h3 style="color: white;">Prochain Cours <i class="fa-solid fa-bell"></i></h3>
-                <p style="font-size: 20px; margin: 10px 0;"><strong>Physique-Chimie</strong></p>
-                <p>10:10 - Salle 204 (M. Atome)</p>
-            </div>
+        <div class="header-bar">
+            <h1>Tableau de bord</h1>
+            <div class="user-info">Session : <strong>Élève Pronote</strong></div>
         </div>
 
-        <img src="https://www.transparentpng.com/download/school-supplies/books-pencil-back-to-school-png-images-12.png" class="bg-decoration">
-    </main>
+        <div class="dashboard-grid">
+            <div class="dash-card">
+                <div class="card-header">🕒 Prochains cours</div>
+                <div class="card-content">
+                    <div class="mini-course tech">
+                        <span class="time">08:00</span>
+                        <span class="subject">TECHNOLOGIE</span>
+                        <span class="room">S102</span>
+                    </div>
+                    <div class="mini-course math">
+                        <span class="time">09:00</span>
+                        <span class="subject">MATHEMATIQUES</span>
+                        <span class="room">S203</span>
+                    </div>
+                </div>
+            </div>
 
-    <script>
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
+            <div class="dash-card">
+                <div class="card-header">📊 Dernières notes</div>
+                <div class="card-content">
+                    <div class="mini-note svt">
+                        <span class="subject">SVT</span>
+                        <span class="score">18/20</span>
+                    </div>
+                    <div class="mini-note hg">
+                        <span class="subject">HISTOIRE-GEO</span>
+                        <span class="score">15/20</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
