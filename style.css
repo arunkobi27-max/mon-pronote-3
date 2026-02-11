@@ -1,255 +1,107 @@
 :root {
-    --bg-body: #f0f2f5;
-    --bg-side: #ffffff;
-    --primary: #009688;
-    --primary-light: rgba(0, 150, 136, 0.1);
-    --text-main: #2d3436;
-    --text-sub: #636e72;
-    --card-bg: #ffffff;
-    --shadow: 0 10px 30px rgba(0,0,0,0.05);
-    --radius: 16px;
-}
-
-.dark-mode {
-    --bg-body: #121212;
-    --bg-side: #1e1e1e;
-    --text-main: #ffffff;
-    --text-sub: #b2bec3;
-    --card-bg: #2d2d2d;
-    --shadow: 0 10px 30px rgba(0,0,0,0.3);
+    --pronote-blue: #0078d7;
+    --pronote-green: #2ecc71;
+    --bg-gray: #f5f5f5;
+    --border-color: #ddd;
+    --text-dark: #333;
 }
 
 body {
     margin: 0;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background-color: var(--bg-body);
-    color: var(--text-main);
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-gray);
     display: flex;
-    transition: all 0.3s ease;
+    color: var(--text-dark);
 }
 
-/* Sidebar stylisée */
+/* Sidebar façon "Menu latéral Pronote" */
 .sidebar {
-    width: 280px;
-    background: var(--bg-side);
+    width: 200px;
+    background: #333;
     height: 100vh;
-    padding: 30px 20px;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
+    color: white;
+    position: fixed;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 50px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    padding: 20px;
+    background: #222;
+    font-weight: bold;
+    text-align: center;
+    color: var(--pronote-green);
 }
 
-nav ul { list-style: none; padding: 0; }
-nav li { margin-bottom: 10px; }
-
+nav ul { list-style: none; padding: 0; margin: 0; }
 .menu-link {
+    display: block;
+    padding: 15px 20px;
+    color: #ccc;
     text-decoration: none;
-    color: var(--text-sub);
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border-radius: var(--radius);
-    font-weight: 500;
-    transition: 0.3s;
+    border-bottom: 1px solid #444;
 }
 
-.menu-link:hover, .active .menu-link {
-    background: var(--primary-light);
-    color: var(--primary);
+.menu-link:hover { background: #444; color: white; }
+.active .menu-link { background: var(--pronote-blue); color: white; }
+
+/* Zone de contenu */
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    width: 100%;
 }
-
-.active .menu-link { background: var(--primary); color: white; }
-
-/* Main Content */
-.content { flex: 1; padding: 40px; }
 
 header {
+    background: white;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
 }
 
-.welcome-msg h1 { margin: 0; font-size: 28px; }
-.welcome-msg p { color: var(--text-sub); margin-top: 5px; }
-
-/* Cards Layout */
-.grid-dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+/* Style Tableau de Notes */
+.notes-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
 }
 
-.card {
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(0,0,0,0.02);
-    transition: transform 0.3s ease;
+.notes-table th {
+    background: #eee;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--border-color);
 }
 
-.card:hover { transform: translateY(-5px); }
-
-.card h3 { 
-    margin-top: 0; 
-    font-size: 18px; 
-    display: flex; 
-    justify-content: space-between;
-    color: var(--primary);
+.notes-table td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
 }
 
-/* Boutons Modernes */
-.btn-mode {
-    background: var(--primary);
+/* Inputs discrets */
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn-add {
+    background: var(--pronote-green);
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 50px;
+    padding: 5px 10px;
     cursor: pointer;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0,150,136, 0.3);
+    border-radius: 3px;
 }
 
-.bg-decoration {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 250px;
-    opacity: 0.15;
-    z-index: -1;
-}
-
-/* Couleurs Matières - Style Moderne Pastel */
-.tech, .math, .phys { background-color: #a2c4a4 !important; color: #1e3a20; }
-.fr { background-color: #e1f0f7 !important; color: #2c527a; }
-.hg { background-color: #92abb5 !important; color: #fff; }
-.music { background-color: #f7e68e !important; color: #5c4e10; }
-.ang { background-color: #d199a4 !important; color: #5c1a26; }
-.esp { background-color: #f2c0bd !important; color: #7a2b26; }
-.svt { background-color: #c9d991 !important; color: #3d4a15; }
-.eps { background-color: #e5dac1 !important; color: #5c4a2a; }
-.arts { background-color: #f2d07e !important; color: #6e4e0a; }
-.empty { background-color: rgba(0,0,0,0.05) !important; color: transparent; border: 1px dashed #ccc !important; }
-
-/* Correction pour le texte des cellules */
-.cell {
-    font-size: 0.85em;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Container de l'emploi du temps pour voir tout sur mobile */
-.timetable-wrapper {
-    overflow-x: auto;
-    padding: 10px !important;
-}
-
-.modern-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 8px;
-    min-width: 600px; /* Force l'affichage pour ne pas tout écraser */
-}
-
-.modern-table th {
-    padding: 15px;
-    color: var(--text-sub);
-    font-weight: 600;
-    text-align: center;
-}
-
-.cell {
-    padding: 20px 10px;
-    text-align: center;
-    border-radius: 12px;
-    font-weight: bold;
+.btn-del {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-.cell:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.time-col { font-weight: bold; color: var(--primary); width: 80px; }
-
-/* Styles du Pop-up Moderne */
-.modern-modal {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(5px); /* Flou d'arrière-plan */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: 0.3s;
-    z-index: 1000;
-}
-
-.modern-modal.active { opacity: 1; pointer-events: auto; }
-
-.modal-card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 24px;
-    width: 300px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.m-detail { margin: 10px 0; color: var(--text-sub); font-size: 1.1em; }
-
-.note-card {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.input-group {
-    display: flex;
-    gap: 10px;
-}
-
-.note-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background: var(--bg-body);
-    color: var(--text-main);
-    font-weight: bold;
-    text-align: center;
-}
-
-.moyenne-display {
-    font-weight: bold;
-    color: var(--primary);
-    border-top: 1px solid rgba(0,0,0,0.05);
-    padding-top: 10px;
-}
-
-.overall-average-card {
-    background: var(--card-bg);
-    padding: 15px 25px;
-    border-radius: 50px;
-    box-shadow: var(--shadow);
-    font-weight: 800;
-    transition: 0.5s;
 }
