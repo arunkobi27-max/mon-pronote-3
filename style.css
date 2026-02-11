@@ -1,267 +1,215 @@
+/* --- VARIABLES ET BASES --- */
 :root {
-    --pronote-blue: #0078d7;
-    --pronote-green: #2ecc71;
-    --bg-gray: #f5f5f5;
-    --border-color: #ddd;
+    --sidebar-bg: #2c3e50;
+    --sidebar-active: #34495e;
+    --bg-main: #f4f4f4;
+    --white: #ffffff;
+    --border-gray: #ccc;
     --text-dark: #333;
+    --text-light: #666;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-gray);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg-main);
     display: flex;
     color: var(--text-dark);
 }
 
-/* Sidebar façon "Menu latéral Pronote" */
+/* --- BARRE LATÉRALE (SIDEBAR) --- */
 .sidebar {
-    width: 200px;
-    background: #333;
+    width: 220px;
+    background: var(--sidebar-bg);
     height: 100vh;
     color: white;
     position: fixed;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 .logo {
-    padding: 20px;
-    background: #222;
+    padding: 30px 20px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
-    color: var(--pronote-green);
+    background: #1a252f;
+    letter-spacing: 2px;
 }
 
-nav ul { list-style: none; padding: 0; margin: 0; }
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
 .menu-link {
     display: block;
-    padding: 15px 20px;
-    color: #ccc;
+    padding: 15px 25px;
+    color: #bdc3c7;
     text-decoration: none;
-    border-bottom: 1px solid #444;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.menu-link:hover { background: #444; color: white; }
-.active .menu-link { background: var(--pronote-blue); color: white; }
+.menu-link:hover {
+    background: var(--sidebar-active);
+    color: white;
+}
 
-/* Zone de contenu */
+.active .menu-link {
+    background: #3498db; /* Bleu Pronote */
+    color: white;
+    border-left: 5px solid #fff;
+}
+
+/* --- ZONE DE CONTENU PRINCIPAL --- */
 .content {
-    margin-left: 200px;
-    padding: 20px;
+    margin-left: 220px;
+    padding: 30px;
     width: 100%;
 }
 
-header {
-    background: white;
-    padding: 15px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 20px;
+.header-bar {
+    background: var(--white);
+    padding: 20px;
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Style Tableau de Notes */
-.notes-table {
+.header-bar h1, .header-bar h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+/* --- TABLEAUX ET GRILLES --- */
+.timetable-container, .notes-container {
+    background: var(--white);
+    padding: 15px;
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.pronote-table, .modern-table {
     width: 100%;
-    background: white;
     border-collapse: collapse;
-    border: 1px solid var(--border-color);
 }
 
-.notes-table th {
+.pronote-table th, .modern-table th {
+    background: #f9f9f9;
+    padding: 12px;
+    border: 1px solid var(--border-gray);
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: normal;
+}
+
+.pronote-table td, .modern-table td {
+    border: 1px solid var(--border-gray);
+    padding: 8px;
+    font-size: 12px;
+}
+
+/* --- STYLE DES CASES (COURS) --- */
+.cell {
+    height: 65px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    transition: 0.2s;
+}
+
+.time-row {
+    font-size: 10px;
+    color: var(--text-light);
+    text-align: right;
+    padding-right: 8px;
+    width: 60px;
+    background: #fdfdfd;
+}
+
+/* --- COULEURS DES MATIÈRES (BORDS ÉPAIS) --- */
+.tech { background: #f1f8e9; border-left: 10px solid #7d9676; }
+.math { background: #e8f5e9; border-left: 10px solid #6b8e79; }
+.fr { background: #e3f2fd; border-left: 10px solid #42a5f5; }
+.music { background: #fffde7; border-left: 10px solid #d4c060; }
+.phys { background: #f1f8e9; border-left: 10px solid #7a8c64; }
+.hg { background: #eceff1; border-left: 10px solid #5a747e; }
+.esp { background: #ffebee; border-left: 10px solid #c98a86; }
+.svt { background: #f9fbe7; border-left: 10px solid #99a862; }
+.eps { background: #efebe9; border-left: 10px solid #b5a484; }
+.arts { background: #fff8e1; border-left: 10px solid #c9a64d; }
+.ang { background: #fce4ec; border-left: 10px solid #a66a76; }
+.empty { background: #eeeeee; }
+
+/* --- PAGES NOTES ET DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.dash-card {
+    background: var(--white);
+    border: 1px solid var(--border-gray);
+    border-radius: 4px;
+}
+
+.card-header {
     background: #eee;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-bottom: 1px solid var(--border-gray);
+    font-weight: bold;
 }
 
-.notes-table td {
-    padding: 10px;
-    border: 1px solid var(--border-color);
+.note-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fafafa;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    border: 1px solid #eee;
 }
 
-/* Inputs discrets */
+/* --- BOUTONS ET INPUTS --- */
 input[type="number"] {
     width: 50px;
     padding: 5px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 4px;
+    text-align: center;
 }
 
 .btn-add {
-    background: var(--pronote-green);
+    background: #4db6ac;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 6px 12px;
+    border-radius: 4px;
     cursor: pointer;
-    border-radius: 3px;
+    font-size: 11px;
+    margin-top: 5px;
 }
 
 .btn-del {
-    background: #e74c3c;
+    background: #e57373;
     color: white;
     border: none;
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-/* Alignement des notes dans le tableau */
-.notes-flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.note-entry {
-    background: #f8f9fa;
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.note-entry input {
-    width: 45px !important;
-    padding: 4px !important;
-    font-size: 13px;
-}
-
-.note-entry small {
-    color: #888;
-    margin-left: 5px;
-}
-
-:root {
-    --bg-app: #f0f2f5;
-    --sidebar-color: #1a1c23;
-    --card-white: #ffffff;
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --text-main: #2d3436;
-    --radius: 12px;
-}
-
-body {
-    background-color: var(--bg-app);
-    font-family: 'Poppins', sans-serif;
-    margin: 0; display: flex;
-}
-
-/* Sidebar sombre et fine */
-.sidebar {
-    width: 80px; height: 100vh; background: var(--sidebar-color);
-    position: fixed; display: flex; flex-direction: column; align-items: center; padding-top: 20px;
-}
-.sidebar a { color: #636e72; font-size: 20px; margin-bottom: 30px; text-decoration: none; transition: 0.3s; }
-.sidebar a.active { color: #fff; }
-
-/* Zone principale */
-.content { margin-left: 80px; padding: 30px; width: 100%; }
-
-.header-title h1 { margin: 0; font-size: 24px; color: var(--text-main); }
-
-/* Grille de l'emploi du temps */
-.timetable-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.day-column { display: flex; flex-direction: column; gap: 15px; }
-.day-name { 
-    text-align: center; font-weight: 700; color: #636e72; 
-    text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
-}
-
-/* Cartes de cours */
-.course-card {
-    background: var(--card-white);
-    padding: 15px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border-left: 5px solid #dfe6e9;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-}
-
-.course-time { font-size: 11px; color: #b2bec3; font-weight: 600; }
-.course-name { display: block; margin: 5px 0; font-weight: 700; color: var(--text-main); }
-.course-room { font-size: 11px; color: var(--primary-gradient); font-weight: 600; background: #f1f2f6; padding: 2px 8px; border-radius: 4px; }
-
-/* Couleurs par matière */
-.math { border-left-color: #ff7675; }
-.fr { border-left-color: #74b9ff; }
-.phys { border-left-color: #55efc4; }
-.hg { border-left-color: #ffeaa7; }
-.ang { border-left-color: #a29bfe; }
-.tech { border-left-color: #81ecec; }
-.eps { border-left-color: #fab1a0; }
-/* Structure de base */
-body { margin: 0; font-family: sans-serif; background: #f4f4f4; display: flex; }
-.sidebar { width: 200px; background: #2c3e50; height: 100vh; color: white; position: fixed; }
-.content { margin-left: 200px; padding: 20px; width: 100%; }
-
-/* Table Style Pronote */
-.timetable-container {
-    background: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    overflow-x: auto;
-}
-
-.pronote-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-.pronote-table th {
-    font-size: 14px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    font-weight: normal;
-    background: #fff;
-}
-
-.time-row {
-    font-size: 11px;
-    color: #666;
-    text-align: right;
-    padding-right: 5px;
-    width: 50px;
-}
-
-.cell {
-    border: 1px solid #999;
-    height: 60px;
-    text-align: center;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 5px;
-    color: #333;
-    vertical-align: middle;
-}
-
-/* Couleurs EXACTES de l'image */
-.tech { background-color: #a8c69f; border-left: 10px solid #7d9676; } /* Vert */
-.math { background-color: #97c1a9; border-left: 10px solid #6b8e79; } /* Vert foncé */
-.fr { background-color: #e3f2fd; border-left: 10px solid #42a5f5; } /* Bleu clair */
-.music { background-color: #f7e38c; border-left: 10px solid #d4c060; } /* Jaune */
-.phys { background-color: #a6b98e; border-left: 10px solid #7a8c64; } /* Vert olive */
-.hg { background-color: #92abb5; border-left: 10px solid #5a747e; } /* Bleu gris */
-.esp { background-color: #f2c1bd; border-left: 10px solid #c98a86; } /* Rose/Rouge */
-.svt { background-color: #c9d991; border-left: 10px solid #99a862; } /* Vert pomme */
-.eps { background-color: #e5dac1; border-left: 10px solid #b5a484; } /* Beige */
-.arts { background-color: #f2d07e; border-left: 10px solid #c9a64d; } /* Orange/Jaune */
-.ang { background-color: #d199a4; border-left: 10px solid #a66a76; } /* Bordeaux/Rose */
-
-.empty { background-color: #e0e0e0; border: 1px solid #ccc; }
+.btn-add:hover { background: #00897b; }
+.btn-del:hover { background: #c62828; }
