@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PRONOTE | Réglages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode"> <aside class="sidebar">
+        <div class="logo">PRONOTE</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="menu-link">🏠 Accueil</a></li>
+                <li><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
+                <li><a href="notes.html" class="menu-link">📊 Notes</a></li>
+                <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
+                <li><a href="profil.html" class="menu-link">👤 Profil</a></li>
+                <li class="active"><a href="reglages.html" class="menu-link">⚙️ Réglages</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <div class="header-bar">
+            <h1>⚙️ Réglages</h1>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dash-card">
+                <div class="card-header">🎨 Apparence</div>
+                <div class="card-content">
+                    <p>Choisir le thème de l'application :</p>
+                    <button class="btn-add" onclick="setTheme('light')">☀️ Mode Clair</button>
+                    <button class="btn-add" onclick="setTheme('dark')" style="background:#34495e;">🌙 Mode Sombre</button>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <div class="card-header">🔒 Mon Compte</div>
+                <div class="card-content">
+                    <div class="info-row">
+                        <strong>Nom d'utilisateur</strong>
+                        <input type="text" value="Jean DUPONT" style="border:1px solid #ccc; padding:5px; border-radius:4px;">
+                    </div>
+                    <div class="info-row" style="margin-top:10px;">
+                        <strong>Mot de passe</strong>
+                        <button class="btn-add" style="background:#e67e22;">Modifier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Fonction simple pour changer le thème
+        function setTheme(theme) {
+            if(theme === 'dark') {
+                document.body.style.backgroundColor = '#1a1c23';
+                document.body.style.color = '#ffffff';
+                // On peut ajouter d'autres changements de couleurs ici
+                alert('Mode Sombre activé (simulation)');
+            } else {
+                document.body.style.backgroundColor = '#f4f4f4';
+                document.body.style.color = '#333';
+                alert('Mode Clair activé');
+            }
+        }
+    </script>
+</body>
+</html>
