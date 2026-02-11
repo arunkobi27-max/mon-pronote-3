@@ -65,5 +65,18 @@
             }
         }
     </script>
+    <div class="info-row">
+    <strong>Nom d'utilisateur</strong>
+    <input type="text" id="edit-username" value="Jean DUPONT">
+    <button class="btn-add" onclick="saveNewName()">Enregistrer</button>
+</div>
+
+<script>
+    function saveNewName() {
+        const newName = document.getElementById('edit-username').value;
+        localStorage.setItem('user_name', newName);
+        alert("Nom mis à jour !");
+    }
+</script>
 </body>
 </html>
