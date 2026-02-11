@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
+<script>
+    if (localStorage.getItem('is_logged_in') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>    
 <head>
     <meta charset="UTF-8">
     <title>Mon Emploi du Temps</title>
