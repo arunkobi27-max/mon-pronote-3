@@ -2,34 +2,35 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>PRONOTE | Notes</title>
+    <title>PRONOTE | Relevé de Notes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <aside class="sidebar">
         <div class="logo">PRONOTE</div>
         <nav>
             <ul>
-                <li><a href="index.html" class="menu-link">Accueil</a></li>
-                <li><a href="emploi.html" class="menu-link">Emploi du temps</a></li>
-                <li class="active"><a href="notes.html" class="menu-link">Notes</a></li>
+                <li><a href="index.html" class="menu-link">🏠 Accueil</a></li>
+                <li><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
+                <li class="active"><a href="notes.html" class="menu-link">📊 Notes</a></li>
+                <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
+                <li><a href="reglages.html" class="menu-link">⚙️ Réglages</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
-        <header>
-            <h2>Relevé de notes</h2>
-            <div>Moyenne Générale : <strong id="total-avg">--</strong></div>
-        </header>
+        <div class="header-bar">
+            <h2>Relevé de notes - Trimestre 1</h2>
+            <div style="font-size: 1.2em;">Moyenne Générale : <strong id="total-avg" style="color:var(--primary)">--</strong></div>
+        </div>
 
-        <table class="notes-table">
+        <table class="modern-table">
             <thead>
                 <tr>
-                    <th>Matière</th>
-                    <th>Notes / Barème / Coeff</th>
-                    <th>Moyenne</th>
+                    <th style="width: 200px;">Matière</th>
+                    <th>Évaluations (Note / Barème / Coeff)</th>
+                    <th style="width: 100px; text-align: center;">Moyenne</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -38,7 +39,13 @@
     </main>
 
     <script>
-        const matieres = ["Mathématiques", "Français", "Anglais", "Histoire-Géo", "SVT", "Physique-Chimie", "Technologie", "EPS"];
+        const matieres = [
+            "Mathématiques", "Français", "Anglais LV1", "Histoire-Géo", 
+            "Physique-Chimie", "SVT", "Technologie", "Espagnol LV2", 
+            "EPS", "Arts Plastiques", "Éducation Musicale", "Vie Scolaire",
+            "Enseignement Moral", "Latin", "Option Info"
+        ];
+
         const tbody = document.getElementById('table-body');
 
         matieres.forEach(m => {
@@ -46,17 +53,19 @@
             row.innerHTML = `
                 <td><strong>${m}</strong></td>
                 <td>
-                    <div id="container-${m}">
-                        <div style="margin-bottom:5px">
-                            <input type="number" class="val" oninput="calc()"> / 
-                            <input type="number" class="base" value="20" oninput="calc()"> | 
-                            Coeff: <input type="number" class="coeff" value="1" oninput="calc()">
+                    <div id="container-${m.replace(/\s/g, '')}" class="notes-flex">
+                        <div class="note-entry">
+                            <input type="number" class="val" placeholder="Note" oninput="calc()">
+                            <span>/</span>
+                            <input type="number" class="base" value="20" oninput="calc()">
+                            <small>Coeff:</small>
+                            <input type="number" class="coeff" value="1" oninput="calc()">
                             <button class="btn-del" onclick="this.parentElement.remove();calc()">×</button>
                         </div>
                     </div>
-                    <button class="btn-add" onclick="addNote('${m}')">+ Ajouter</button>
+                    <button class="btn-add" onclick="addNote('${m.replace(/\s/g, '')}')">+ Ajouter une note</button>
                 </td>
-                <td><span class="sub-avg">--</span></td>
+                <td style="text-align: center;"><span class="sub-avg" style="font-weight:bold">--</span></td>
             `;
             tbody.appendChild(row);
         });
@@ -64,11 +73,13 @@
         function addNote(id) {
             const container = document.getElementById(`container-${id}`);
             const div = document.createElement('div');
-            div.style.marginBottom = "5px";
+            div.className = 'note-entry';
             div.innerHTML = `
-                <input type="number" class="val" oninput="calc()"> / 
-                <input type="number" class="base" value="20" oninput="calc()"> | 
-                Coeff: <input type="number" class="coeff" value="1" oninput="calc()">
+                <input type="number" class="val" placeholder="Note" oninput="calc()">
+                <span>/</span>
+                <input type="number" class="base" value="20" oninput="calc()">
+                <small>Coeff:</small>
+                <input type="number" class="coeff" value="1" oninput="calc()">
                 <button class="btn-del" onclick="this.parentElement.remove();calc()">×</button>
             `;
             container.appendChild(div);
@@ -76,16 +87,15 @@
 
         function calc() {
             let totalGeneral = 0; let nbMatieres = 0;
-            document.querySelectorAll('tr').forEach(tr => {
+            document.querySelectorAll('#table-body tr').forEach(tr => {
                 const subAvgSpan = tr.querySelector('.sub-avg');
-                if(!subAvgSpan) return;
-
                 let points = 0; let coeffs = 0;
-                tr.querySelectorAll('.val').forEach((input, i) => {
-                    const v = parseFloat(input.value);
-                    const b = parseFloat(tr.querySelectorAll('.base')[i].value);
-                    const c = parseFloat(tr.querySelectorAll('.coeff')[i].value);
-                    if(!isNaN(v) && b > 0) {
+                
+                tr.querySelectorAll('.note-entry').forEach(entry => {
+                    const v = parseFloat(entry.querySelector('.val').value);
+                    const b = parseFloat(entry.querySelector('.base').value);
+                    const c = parseFloat(entry.querySelector('.coeff').value);
+                    if(!isNaN(v) && b > 0 && c > 0) {
                         points += (v/b*20) * c;
                         coeffs += c;
                     }
@@ -97,7 +107,7 @@
                     totalGeneral += m; nbMatieres++;
                 } else { subAvgSpan.innerText = "--"; }
             });
-            document.getElementById('total-avg').innerText = nbMatieres > 0 ? (totalGeneral/nbMatieres).toFixed(2) : "--";
+            document.getElementById('total-avg').innerText = nbMatieres > 0 ? (totalGeneral/nbMatieres).toFixed(2) + "/20" : "--";
         }
     </script>
 </body>
