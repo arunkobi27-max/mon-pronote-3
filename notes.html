@@ -63,44 +63,103 @@
         </div>
     </main>
 
-    <script>
-        function calculateMoyenne() {
-            const cards = document.querySelectorAll('.note-card');
-            let totalGeneral = 0;
-            let countMatiere = 0;
+   <script>
+    const matieres = [
+        "Mathématiques", "Français", "Anglais LV1", "Histoire-Géo", 
+        "Physique-Chimie", "SVT", "Technologie", "Espagnol LV2", 
+        "EPS", "Arts Plastiques", "Éducation Musicale", "Vie Scolaire"
+    ];
 
-            cards.forEach(card => {
-                const inputs = card.querySelectorAll('.note-input');
-                let sum = 0;
-                let count = 0;
+    const grid = document.getElementById('notes-grid');
 
-                inputs.forEach(input => {
-                    if (input.value !== "") {
-                        sum += parseFloat(input.value);
-                        count++;
-                    }
-                });
+    matieres.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'card note-card';
+        card.innerHTML = `
+            <h3>${m}</h3>
+            <div class="labels-row">
+                <small>Note</small> <small>Base</small> <small>Coeff</small>
+            </div>
+            <div class="notes-container" id="container-${m}">
+                <div class="note-row">
+                    <input type="number" class="val" placeholder="0" oninput="calc()">
+                    <input type="number" class="base" value="20" oninput="calc()">
+                    <input type="number" class="coeff" value="1" oninput="calc()">
+                    <button class="delete-btn" onclick="removeNote(this)">×</button>
+                </div>
+            </div>
+            <button class="add-note-btn" onclick="addNoteLine('${m}')">+ Ajouter une note</button>
+            <div class="moyenne-display">Moyenne : <span class="sub-moy">--</span></div>
+        `;
+        grid.appendChild(card);
+    });
 
-                const display = card.querySelector('.sub-moy');
-                if (count > 0) {
-                    let moy = sum / count;
-                    display.innerText = moy.toFixed(2);
-                    totalGeneral += moy;
-                    countMatiere++;
-                } else {
-                    display.innerText = "--";
+    // Fonction pour ajouter une ligne
+    function addNoteLine(id) {
+        const container = document.getElementById(`container-${id}`);
+        const div = document.createElement('div');
+        div.className = 'note-row';
+        div.innerHTML = `
+            <input type="number" class="val" placeholder="0" oninput="calc()">
+            <input type="number" class="base" value="20" oninput="calc()">
+            <input type="number" class="coeff" value="1" oninput="calc()">
+            <button class="delete-btn" onclick="removeNote(this)">×</button>
+        `;
+        container.appendChild(div);
+        calc();
+    }
+
+    // NOUVELLE FONCTION : Supprimer une ligne
+    function removeNote(btn) {
+        const row = btn.parentElement;
+        row.remove(); // Supprime la ligne du code
+        calc(); // Recalcule la moyenne immédiatement
+    }
+
+    function calc() {
+        const cards = document.querySelectorAll('.note-card');
+        let sommeMoyennes = 0;
+        let nbMatieres = 0;
+
+        cards.forEach(card => {
+            const rows = card.querySelectorAll('.note-row');
+            let pointsPonderes = 0;
+            let totalCoeffs = 0;
+
+            rows.forEach(row => {
+                const v = parseFloat(row.querySelector('.val').value);
+                const b = parseFloat(row.querySelector('.base').value);
+                const c = parseFloat(row.querySelector('.coeff').value);
+
+                if (!isNaN(v) && !isNaN(b) && !isNaN(c) && b > 0 && c >= 0) {
+                    let noteSur20 = (v / b) * 20;
+                    pointsPonderes += (noteSur20 * c);
+                    totalCoeffs += c;
                 }
             });
 
-            const generalDisplay = document.getElementById('general-average');
-            if (countMatiere > 0) {
-                generalDisplay.innerText = (totalGeneral / countMatiere).toFixed(2);
-                generalDisplay.parentElement.style.background = "var(--primary)";
-                generalDisplay.parentElement.style.color = "white";
+            const display = card.querySelector('.sub-moy');
+            if (totalCoeffs > 0) {
+                let moy = pointsPonderes / totalCoeffs;
+                display.innerText = moy.toFixed(2) + "/20";
+                sommeMoyennes += moy;
+                nbMatieres++;
             } else {
-                generalDisplay.innerText = "--";
+                display.innerText = "--";
             }
+        });
+
+        const genDisplay = document.getElementById('general-average');
+        const avgBox = document.getElementById('avg-box');
+        if (nbMatieres > 0) {
+            let gen = sommeMoyennes / nbMatieres;
+            genDisplay.innerText = gen.toFixed(2);
+            avgBox.style.background = gen >= 10 ? "var(--primary)" : "#e74c3c";
+        } else {
+            genDisplay.innerText = "--";
+            avgBox.style.background = "var(--card-bg)";
         }
-    </script>
+    }
+</script>
 </body>
 </html>
