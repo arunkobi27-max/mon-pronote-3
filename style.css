@@ -256,3 +256,66 @@ input[type="number"] {
     color: #333;
     width: 150px;
 }
+
+/* --- STYLE AGENDA --- */
+.agenda-day {
+    background: white;
+    padding: 20px;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+}
+
+.day-label {
+    font-weight: bold;
+    color: var(--sidebar-bg);
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.homework-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.homework-card:hover {
+    background: #f9f9f9;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+}
+
+.hw-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hw-subject {
+    font-size: 10px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: var(--text-light);
+}
+
+.hw-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Case à cocher pour marquer comme fait */
+.hw-check {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+/* On réutilise les bordures de l'emploi du temps */
+.homework-card.math { border-left: 6px solid #6b8e79; }
+.homework-card.fr { border-left: 6px solid #42a5f5; }
+.homework-card.hg { border-left: 6px solid #5a747e; }
