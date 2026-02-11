@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+    // On récupère l'email stocké dans le localStorage
+    const savedEmail = localStorage.getItem('user_email');
+    
+    // Si un email est trouvé, on l'affiche, sinon on met un texte par défaut
+    if (savedEmail) {
+        document.getElementById('user-email-display').innerText = savedEmail;
+    } else {
+        document.getElementById('user-email-display').innerText = "Non connecté";
+    }
+</script>
     <aside class="sidebar">
         <div class="logo">PRONOTE</div>
         <nav>
@@ -83,6 +94,10 @@
                         </tbody>
                     </table>
                 </div>
+                 <div class="info-row">
+    <strong>Email :</strong> 
+    <span id="user-email-display">chargement...</span>
+</div>
             </div>
         </div>
     </main>
