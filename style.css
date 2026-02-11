@@ -205,3 +205,63 @@ body {
 .ang { border-left-color: #a29bfe; }
 .tech { border-left-color: #81ecec; }
 .eps { border-left-color: #fab1a0; }
+/* Structure de base */
+body { margin: 0; font-family: sans-serif; background: #f4f4f4; display: flex; }
+.sidebar { width: 200px; background: #2c3e50; height: 100vh; color: white; position: fixed; }
+.content { margin-left: 200px; padding: 20px; width: 100%; }
+
+/* Table Style Pronote */
+.timetable-container {
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-x: auto;
+}
+
+.pronote-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.pronote-table th {
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-weight: normal;
+    background: #fff;
+}
+
+.time-row {
+    font-size: 11px;
+    color: #666;
+    text-align: right;
+    padding-right: 5px;
+    width: 50px;
+}
+
+.cell {
+    border: 1px solid #999;
+    height: 60px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* Couleurs EXACTES de l'image */
+.tech { background-color: #a8c69f; border-left: 10px solid #7d9676; } /* Vert */
+.math { background-color: #97c1a9; border-left: 10px solid #6b8e79; } /* Vert foncé */
+.fr { background-color: #e3f2fd; border-left: 10px solid #42a5f5; } /* Bleu clair */
+.music { background-color: #f7e38c; border-left: 10px solid #d4c060; } /* Jaune */
+.phys { background-color: #a6b98e; border-left: 10px solid #7a8c64; } /* Vert olive */
+.hg { background-color: #92abb5; border-left: 10px solid #5a747e; } /* Bleu gris */
+.esp { background-color: #f2c1bd; border-left: 10px solid #c98a86; } /* Rose/Rouge */
+.svt { background-color: #c9d991; border-left: 10px solid #99a862; } /* Vert pomme */
+.eps { background-color: #e5dac1; border-left: 10px solid #b5a484; } /* Beige */
+.arts { background-color: #f2d07e; border-left: 10px solid #c9a64d; } /* Orange/Jaune */
+.ang { background-color: #d199a4; border-left: 10px solid #a66a76; } /* Bordeaux/Rose */
+
+.empty { background-color: #e0e0e0; border: 1px solid #ccc; }
