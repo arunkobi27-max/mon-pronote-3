@@ -134,3 +134,74 @@ input[type="number"] {
     color: #888;
     margin-left: 5px;
 }
+
+:root {
+    --bg-app: #f0f2f5;
+    --sidebar-color: #1a1c23;
+    --card-white: #ffffff;
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --text-main: #2d3436;
+    --radius: 12px;
+}
+
+body {
+    background-color: var(--bg-app);
+    font-family: 'Poppins', sans-serif;
+    margin: 0; display: flex;
+}
+
+/* Sidebar sombre et fine */
+.sidebar {
+    width: 80px; height: 100vh; background: var(--sidebar-color);
+    position: fixed; display: flex; flex-direction: column; align-items: center; padding-top: 20px;
+}
+.sidebar a { color: #636e72; font-size: 20px; margin-bottom: 30px; text-decoration: none; transition: 0.3s; }
+.sidebar a.active { color: #fff; }
+
+/* Zone principale */
+.content { margin-left: 80px; padding: 30px; width: 100%; }
+
+.header-title h1 { margin: 0; font-size: 24px; color: var(--text-main); }
+
+/* Grille de l'emploi du temps */
+.timetable-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.day-column { display: flex; flex-direction: column; gap: 15px; }
+.day-name { 
+    text-align: center; font-weight: 700; color: #636e72; 
+    text-transform: uppercase; font-size: 13px; letter-spacing: 1px;
+}
+
+/* Cartes de cours */
+.course-card {
+    background: var(--card-white);
+    padding: 15px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border-left: 5px solid #dfe6e9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.course-time { font-size: 11px; color: #b2bec3; font-weight: 600; }
+.course-name { display: block; margin: 5px 0; font-weight: 700; color: var(--text-main); }
+.course-room { font-size: 11px; color: var(--primary-gradient); font-weight: 600; background: #f1f2f6; padding: 2px 8px; border-radius: 4px; }
+
+/* Couleurs par matière */
+.math { border-left-color: #ff7675; }
+.fr { border-left-color: #74b9ff; }
+.phys { border-left-color: #55efc4; }
+.hg { border-left-color: #ffeaa7; }
+.ang { border-left-color: #a29bfe; }
+.tech { border-left-color: #81ecec; }
+.eps { border-left-color: #fab1a0; }
