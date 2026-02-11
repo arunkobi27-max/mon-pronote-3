@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>PRONOTE | Emploi du temps</title>
+    <title>Mon Emploi du Temps</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,41 +13,104 @@
                 <li><a href="index.html" class="menu-link">🏠 Accueil</a></li>
                 <li class="active"><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
                 <li><a href="notes.html" class="menu-link">📊 Notes</a></li>
-                <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
-                <li><a href="reglages.html" class="menu-link">⚙️ Réglages</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="content">
         <div class="header-bar">
-            <h2>Emploi du temps - Semaine A</h2>
+            <h2>Emploi du temps</h2>
+            <p>Semaine du 29 sept. au 03 oct.</p>
         </div>
 
-        <table class="modern-table">
-            <thead>
-                <tr>
-                    <th>Heure</th>
-                    <th>Lundi</th>
-                    <th>Mardi</th>
-                    <th>Mercredi</th>
-                    <th>Jeudi</th>
-                    <th>Vendredi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>08h00</td><td class="cell tech">TECH</td><td class="cell fr">FRAN</td><td class="cell math">MATH</td><td class="cell math">MATH</td><td class="cell empty">--</td></tr>
-                <tr><td>09h00</td><td class="cell math">MATH</td><td class="cell tech">TECH</td><td class="cell music">MUSI</td><td class="cell fr">FRAN</td><td class="cell ang">ANGL</td></tr>
-                <tr><td>10h10</td><td class="cell fr">FRAN</td><td class="cell phys">PHYS</td><td class="cell fr">FRAN</td><td class="cell ang">ANGL</td><td class="cell eps">EPS</td></tr>
-                <tr><td>11h05</td><td class="cell hg">H-G</td><td class="cell math">MATH</td><td class="cell esp">ESPA</td><td class="cell svt">SVT</td><td class="cell hg">H-G</td></tr>
-                <tr><td>12h05</td><td class="cell empty">PAUSE</td><td class="cell empty">PAUSE</td><td class="cell empty">PAUSE</td><td class="cell empty">PAUSE</td><td class="cell empty">PAUSE</td></tr>
-                <tr><td>13h30</td><td class="cell ang">ANGL</td><td class="cell eps">EPS</td><td class="cell empty">--</td><td class="cell esp">ESPA</td><td class="cell arts">ARTS</td></tr>
-                <tr><td>14h30</td><td class="cell fr">FRAN</td><td class="cell eps">EPS</td><td class="cell empty">--</td><td class="cell hg">H-G</td><td class="cell hg">H-G</td></tr>
-                <tr><td>15h35</td><td class="cell svt">SVT</td><td class="cell empty">--</td><td class="cell empty">--</td><td class="cell empty">--</td><td class="cell esp">ESPA</td></tr>
-                <tr><td>16h35</td><td class="cell empty">--</td><td class="cell empty">--</td><td class="cell empty">--</td><td class="cell empty">--</td><td class="cell empty">--</td></tr>
-            </tbody>
-        </table>
+        <div class="timetable-container">
+            <table class="pronote-table">
+                <thead>
+                    <tr>
+                        <th class="time-col"></th>
+                        <th>lun. 29 sept.</th>
+                        <th>mar. 30 sept.</th>
+                        <th>mer. 01 oct.</th>
+                        <th>jeu. 02 oct.</th>
+                        <th>ven. 03 oct.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="time-row">08h00<br>09h00</td>
+                        <td class="cell tech">TECHNOLOGIE</td>
+                        <td class="cell fr">FRANCAIS</td>
+                        <td class="cell math">MATHEMATIQUES</td>
+                        <td class="cell math">MATHEMATIQUES</td>
+                        <td class="cell empty"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">09h00<br>10h10</td>
+                        <td class="cell math">MATHEMATIQUES</td>
+                        <td class="cell tech">TECHNOLOGIE</td>
+                        <td class="cell music">EDUCATION MUSICALE</td>
+                        <td class="cell fr">FRANCAIS</td>
+                        <td class="cell ang">ANGLAIS LV1</td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">10h10<br>11h05</td>
+                        <td class="cell fr">FRANCAIS</td>
+                        <td class="cell phys">PHYSIQUE-CHIMIE</td>
+                        <td class="cell fr">FRANCAIS</td>
+                        <td class="cell ang">ANGLAIS LV1</td>
+                        <td class="cell eps">ED.PHYSIQUE & SPORT.</td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">11h05<br>12h05</td>
+                        <td class="cell hg">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="cell math">MATHEMATIQUES</td>
+                        <td class="cell esp">ESPAGNOL LV2</td>
+                        <td class="cell svt">SCIENCES VIE & TERRE</td>
+                        <td class="cell hg">HISTOIRE-GEOGRAPHIE</td>
+                    </tr>
+                    <tr class="break-row">
+                        <td class="time-row">12h05<br>13h30</td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">13h30<br>14h30</td>
+                        <td class="cell ang">ANGLAIS LV1</td>
+                        <td class="cell eps">ED.PHYSIQUE & SPORT.</td>
+                        <td class="cell empty"></td>
+                        <td class="cell esp">ESPAGNOL LV2</td>
+                        <td class="cell arts">ARTS PLASTIQUES</td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">14h30<br>15h35</td>
+                        <td class="cell fr">FRANCAIS</td>
+                        <td class="cell eps">ED.PHYSIQUE & SPORT.</td>
+                        <td class="cell empty"></td>
+                        <td class="cell hg">HISTOIRE-GEOGRAPHIE</td>
+                        <td class="cell hg">HISTOIRE-GEOGRAPHIE</td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">15h35<br>16h35</td>
+                        <td class="cell svt">SCIENCES VIE & TERRE</td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell esp">ESPAGNOL LV2</td>
+                    </tr>
+                    <tr>
+                        <td class="time-row">16h35<br>17h30</td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                        <td class="cell empty"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
-</html>
 </html>
