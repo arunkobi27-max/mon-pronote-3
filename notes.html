@@ -1,172 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-<script>
-   // Liste des matières (identique à ton tableau)
-const matieres = [
-    "Mathématiques", "Français", "Anglais LV1", "Histoire-Géo", 
-    "Physique-Chimie", "SVT", "Technologie", "Espagnol LV2", 
-    "EPS", "Arts Plastiques", "Éducation Musicale", "Vie Scolaire",
-    "Enseignement Moral", "Latin", "Option Info"
-];
-
-const tbody = document.getElementById('table-body');
-
-// 1. Charger les matières et les notes sauvegardées au démarrage
-window.onload = function() {
-    initTable();
-    loadNotes();
-    calc();
-};
-
-// Initialise le tableau vide
-function initTable() {
-    tbody.innerHTML = "";
-    matieres.forEach(m => {
-        const id = m.replace(/\s/g, '');
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td><strong>${m}</strong></td>
-            <td>
-                <div id="container-${id}" class="notes-flex"></div>
-                <button class="btn-add" onclick="addNote('${id}'); saveNotes()">+ Note</button>
-            </td>
-            <td style="text-align: center;"><span class="sub-avg" style="font-weight:bold">--</span></td>
-        `;
-        tbody.appendChild(row);
-    });
-}
-
-// Ajoute une ligne de note vide
-function addNote(id, val = "", base = "20", coeff = "1") {
-    const container = document.getElementById(`container-${id}`);
-    const div = document.createElement('div');
-    div.className = 'note-entry';
-    div.innerHTML = `
-        <input type="number" class="val" value="${val}" placeholder="Note" oninput="calc(); saveNotes()">
-        <span>/</span>
-        <input type="number" class="base" value="${base}" oninput="calc(); saveNotes()">
-        <small>Coeff:</small>
-        <input type="number" class="coeff" value="${coeff}" oninput="calc(); saveNotes()">
-        <button class="btn-del" onclick="this.parentElement.remove(); calc(); saveNotes()">×</button>
-    `;
-    container.appendChild(div);
-}
-
-// SAUVEGARDE dans le navigateur
-function saveNotes() {
-    const allData = {};
-    matieres.forEach(m => {
-        const id = m.replace(/\s/g, '');
-        const container = document.getElementById(`container-${id}`);
-        const notes = [];
-        container.querySelectorAll('.note-entry').forEach(entry => {
-            notes.push({
-                v: entry.querySelector('.val').value,
-                b: entry.querySelector('.base').value,
-                c: entry.querySelector('.coeff').value
-            });
-        });
-        allData[id] = notes;
-    });
-    localStorage.setItem('ma_sauvegarde_notes', JSON.stringify(allData));
-}
-
-// CHARGE les notes depuis le navigateur
-function loadNotes() {
-    const saved = localStorage.getItem('ma_sauvegarde_notes');
-    if (!saved) return;
-    const data = JSON.parse(saved);
-
-    for (const id in data) {
-        data[id].forEach(n => {
-            addNote(id, n.v, n.b, n.c);
-        });
-    }
-}
-
-// CALCUL de la moyenne
-function calc() {
-    let totalGeneral = 0; 
-    let nbMatieres = 0;
-    
-    document.querySelectorAll('#table-body tr').forEach(tr => {
-        const subAvgSpan = tr.querySelector('.sub-avg');
-        let points = 0; 
-        let coeffs = 0;
-        
-        tr.querySelectorAll('.note-entry').forEach(entry => {
-            const v = parseFloat(entry.querySelector('.val').value);
-            const b = parseFloat(entry.querySelector('.base').value);
-            const c = parseFloat(entry.querySelector('.coeff').value);
-            if(!isNaN(v) && b > 0 && c > 0) {
-                points += (v / b * 20) * c;
-                coeffs += c;
-            }
-        });
-
-        if(coeffs > 0) {
-            let m = points / coeffs;
-            subAvgSpan.innerText = m.toFixed(2);
-            totalGeneral += m; 
-            nbMatieres++;
-        } else { 
-            subAvgSpan.innerText = "--"; 
-        }
-    });
-    
-    const globalAvg = document.getElementById('total-avg');
-    if(nbMatieres > 0) {
-        globalAvg.innerText = (totalGeneral / nbMatieres).toFixed(2) + "/20";
-    } else {
-        globalAvg.innerText = "--";
-    }
-}
-</script>    
 <head>
     <meta charset="UTF-8">
-    <title>PRONOTE | Relevé de Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRONOTE | Mes Notes</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Sécurité : Redirige vers login si pas connecté
+        if (localStorage.getItem('is_logged_in') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
+
     <aside class="sidebar">
         <div class="logo">PRONOTE</div>
-       <nav>
-    <ul>
-        <li><a href="index.html" class="menu-link">🏠 Accueil</a></li>
-        <li><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
-        <li class="active"><a href="notes.html" class="menu-link">📊 Notes</a></li>
-        <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
-        <li><a href="profil.html" class="menu-link">👤 Mon Profil</a></li>
-        <li><a href="reglages.html" class="menu-link">⚙️ Réglages</a></li>
-        <li><a href="#" class="menu-link" onclick="logout()">🚪 Déconnexion</a></li>
-
-<script>
-    function logout() {
-        localStorage.removeItem('is_logged_in');
-        window.location.href = 'login.html';
-    }
-</script>
-    </ul>
-</nav>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="menu-link">🏠 Accueil</a></li>
+                <li><a href="emploi.html" class="menu-link">📅 Emploi du temps</a></li>
+                <li class="active"><a href="notes.html" class="menu-link">📊 Notes</a></li>
+                <li><a href="agenda.html" class="menu-link">📚 Agenda</a></li>
+                <li><a href="profil.html" class="menu-link">👤 Profil</a></li>
+                <li><a href="reglages.html" class="menu-link">⚙️ Réglages</a></li>
+            </ul>
+        </nav>
     </aside>
 
     <main class="content">
         <div class="header-bar">
-            <h2>Relevé de notes - Trimestre 1</h2>
-            <div style="font-size: 1.2em;">Moyenne Générale : <strong id="total-avg" style="color:var(--primary)">--</strong></div>
+            <div>
+                <h1>📊 Relevé de notes</h1>
+                <p style="color: #666; margin: 5px 0 0 0;">Trimestre 1</p>
+            </div>
+            <div class="moyenne-generale">
+                Moyenne Générale : <strong id="total-avg">--</strong>
+            </div>
         </div>
 
-        <table class="modern-table">
-            <thead>
-                <tr>
-                    <th style="width: 200px;">Matière</th>
-                    <th>Évaluations (Note / Barème / Coeff)</th>
-                    <th style="width: 100px; text-align: center;">Moyenne</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                </tbody>
-        </table>
+        <div class="notes-container">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Matière</th>
+                        <th style="width: 65%;">Notes (Note / Barème / Coeff)</th>
+                        <th style="width: 15%; text-align: center;">Moyenne</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    </tbody>
+            </table>
+        </div>
     </main>
 
     <script>
@@ -179,67 +65,181 @@ function calc() {
 
         const tbody = document.getElementById('table-body');
 
-        matieres.forEach(m => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><strong>${m}</strong></td>
-                <td>
-                    <div id="container-${m.replace(/\s/g, '')}" class="notes-flex">
-                        <div class="note-entry">
-                            <input type="number" class="val" placeholder="Note" oninput="calc()">
-                            <span>/</span>
-                            <input type="number" class="base" value="20" oninput="calc()">
-                            <small>Coeff:</small>
-                            <input type="number" class="coeff" value="1" oninput="calc()">
-                            <button class="btn-del" onclick="this.parentElement.remove();calc()">×</button>
-                        </div>
-                    </div>
-                    <button class="btn-add" onclick="addNote('${m.replace(/\s/g, '')}')">+ Ajouter une note</button>
-                </td>
-                <td style="text-align: center;"><span class="sub-avg" style="font-weight:bold">--</span></td>
-            `;
-            tbody.appendChild(row);
-        });
+        // Initialisation au chargement
+        window.onload = function() {
+            renderTable();
+            loadNotes();
+            calc();
+        };
 
-        function addNote(id) {
+        // Création des lignes du tableau
+        function renderTable() {
+            tbody.innerHTML = "";
+            matieres.forEach(m => {
+                const id = m.replace(/\s/g, '');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="font-weight: 600; color: #2c3e50;">${m}</td>
+                    <td>
+                        <div id="container-${id}" class="notes-flex"></div>
+                        <button class="btn-add" onclick="addNote('${id}'); saveNotes()">+ Ajouter une note</button>
+                    </td>
+                    <td style="text-align: center;">
+                        <span id="avg-${id}" class="sub-avg" style="font-weight:bold; font-size: 1.1em;">--</span>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Ajouter une bulle de note
+        function addNote(id, val = "", base = "20", coeff = "1") {
             const container = document.getElementById(`container-${id}`);
             const div = document.createElement('div');
             div.className = 'note-entry';
             div.innerHTML = `
-                <input type="number" class="val" placeholder="Note" oninput="calc()">
-                <span>/</span>
-                <input type="number" class="base" value="20" oninput="calc()">
-                <small>Coeff:</small>
-                <input type="number" class="coeff" value="1" oninput="calc()">
-                <button class="btn-del" onclick="this.parentElement.remove();calc()">×</button>
+                <input type="number" class="val" value="${val}" placeholder="Note" oninput="calc(); saveNotes()">
+                <span style="color:#999">/</span>
+                <input type="number" class="base" value="${base}" oninput="calc(); saveNotes()">
+                <small style="color:#888; margin-left:5px">coeff:</small>
+                <input type="number" class="coeff" value="${coeff}" oninput="calc(); saveNotes()">
+                <button class="btn-del" onclick="this.parentElement.remove(); calc(); saveNotes()">×</button>
             `;
             container.appendChild(div);
         }
 
+        // Calculer les moyennes
         function calc() {
-            let totalGeneral = 0; let nbMatieres = 0;
-            document.querySelectorAll('#table-body tr').forEach(tr => {
-                const subAvgSpan = tr.querySelector('.sub-avg');
-                let points = 0; let coeffs = 0;
+            let totalGeneral = 0;
+            let countMatieres = 0;
+
+            matieres.forEach(m => {
+                const id = m.replace(/\s/g, '');
+                const container = document.getElementById(`container-${id}`);
+                const subAvgSpan = document.getElementById(`avg-${id}`);
                 
-                tr.querySelectorAll('.note-entry').forEach(entry => {
+                let points = 0;
+                let coeffs = 0;
+
+                container.querySelectorAll('.note-entry').forEach(entry => {
                     const v = parseFloat(entry.querySelector('.val').value);
                     const b = parseFloat(entry.querySelector('.base').value);
                     const c = parseFloat(entry.querySelector('.coeff').value);
-                    if(!isNaN(v) && b > 0 && c > 0) {
-                        points += (v/b*20) * c;
+
+                    if (!isNaN(v) && b > 0 && c > 0) {
+                        points += (v / b * 20) * c;
                         coeffs += c;
                     }
                 });
 
-                if(coeffs > 0) {
-                    let m = points/coeffs;
-                    subAvgSpan.innerText = m.toFixed(2);
-                    totalGeneral += m; nbMatieres++;
-                } else { subAvgSpan.innerText = "--"; }
+                if (coeffs > 0) {
+                    const moyenne = points / coeffs;
+                    subAvgSpan.innerText = moyenne.toFixed(2);
+                    totalGeneral += moyenne;
+                    countMatieres++;
+                } else {
+                    subAvgSpan.innerText = "--";
+                }
             });
-            document.getElementById('total-avg').innerText = nbMatieres > 0 ? (totalGeneral/nbMatieres).toFixed(2) + "/20" : "--";
+
+            const totalDisplay = document.getElementById('total-avg');
+            if (countMatieres > 0) {
+                totalDisplay.innerText = (totalGeneral / countMatieres).toFixed(2) + "/20";
+            } else {
+                totalDisplay.innerText = "--";
+            }
+        }
+
+        // SAUVEGARDE AUTOMATIQUE
+        function saveNotes() {
+            const dataToSave = {};
+            matieres.forEach(m => {
+                const id = m.replace(/\s/g, '');
+                const container = document.getElementById(`container-${id}`);
+                const notes = [];
+                container.querySelectorAll('.note-entry').forEach(entry => {
+                    notes.push({
+                        v: entry.querySelector('.val').value,
+                        b: entry.querySelector('.base').value,
+                        c: entry.querySelector('.coeff').value
+                    });
+                });
+                dataToSave[id] = notes;
+            });
+            localStorage.setItem('pronote_data_notes', JSON.stringify(dataToSave));
+        }
+
+        // CHARGEMENT AUTOMATIQUE
+        function loadNotes() {
+            const saved = localStorage.getItem('pronote_data_notes');
+            if (!saved) return;
+            const data = JSON.parse(saved);
+
+            for (const id in data) {
+                data[id].forEach(n => {
+                    addNote(id, n.v, n.b, n.c);
+                });
+            }
         }
     </script>
+
+    <style>
+        /* Styles spécifiques pour cette page */
+        .moyenne-generale {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+
+        .notes-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .note-entry {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 5px 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .note-entry input {
+            width: 42px;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .btn-add {
+            background: #e8f4fd;
+            color: #3498db;
+            border: 1px dashed #3498db;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn-add:hover { background: #3498db; color: white; }
+
+        .btn-del {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+    </style>
 </body>
 </html>
