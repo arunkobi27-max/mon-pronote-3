@@ -1,9 +1,126 @@
 <!DOCTYPE html>
 <html lang="fr">
 <script>
-    if (localStorage.getItem('is_logged_in') !== 'true') {
-        window.location.href = 'login.html';
+   // Liste des matières (identique à ton tableau)
+const matieres = [
+    "Mathématiques", "Français", "Anglais LV1", "Histoire-Géo", 
+    "Physique-Chimie", "SVT", "Technologie", "Espagnol LV2", 
+    "EPS", "Arts Plastiques", "Éducation Musicale", "Vie Scolaire",
+    "Enseignement Moral", "Latin", "Option Info"
+];
+
+const tbody = document.getElementById('table-body');
+
+// 1. Charger les matières et les notes sauvegardées au démarrage
+window.onload = function() {
+    initTable();
+    loadNotes();
+    calc();
+};
+
+// Initialise le tableau vide
+function initTable() {
+    tbody.innerHTML = "";
+    matieres.forEach(m => {
+        const id = m.replace(/\s/g, '');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><strong>${m}</strong></td>
+            <td>
+                <div id="container-${id}" class="notes-flex"></div>
+                <button class="btn-add" onclick="addNote('${id}'); saveNotes()">+ Note</button>
+            </td>
+            <td style="text-align: center;"><span class="sub-avg" style="font-weight:bold">--</span></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Ajoute une ligne de note vide
+function addNote(id, val = "", base = "20", coeff = "1") {
+    const container = document.getElementById(`container-${id}`);
+    const div = document.createElement('div');
+    div.className = 'note-entry';
+    div.innerHTML = `
+        <input type="number" class="val" value="${val}" placeholder="Note" oninput="calc(); saveNotes()">
+        <span>/</span>
+        <input type="number" class="base" value="${base}" oninput="calc(); saveNotes()">
+        <small>Coeff:</small>
+        <input type="number" class="coeff" value="${coeff}" oninput="calc(); saveNotes()">
+        <button class="btn-del" onclick="this.parentElement.remove(); calc(); saveNotes()">×</button>
+    `;
+    container.appendChild(div);
+}
+
+// SAUVEGARDE dans le navigateur
+function saveNotes() {
+    const allData = {};
+    matieres.forEach(m => {
+        const id = m.replace(/\s/g, '');
+        const container = document.getElementById(`container-${id}`);
+        const notes = [];
+        container.querySelectorAll('.note-entry').forEach(entry => {
+            notes.push({
+                v: entry.querySelector('.val').value,
+                b: entry.querySelector('.base').value,
+                c: entry.querySelector('.coeff').value
+            });
+        });
+        allData[id] = notes;
+    });
+    localStorage.setItem('ma_sauvegarde_notes', JSON.stringify(allData));
+}
+
+// CHARGE les notes depuis le navigateur
+function loadNotes() {
+    const saved = localStorage.getItem('ma_sauvegarde_notes');
+    if (!saved) return;
+    const data = JSON.parse(saved);
+
+    for (const id in data) {
+        data[id].forEach(n => {
+            addNote(id, n.v, n.b, n.c);
+        });
     }
+}
+
+// CALCUL de la moyenne
+function calc() {
+    let totalGeneral = 0; 
+    let nbMatieres = 0;
+    
+    document.querySelectorAll('#table-body tr').forEach(tr => {
+        const subAvgSpan = tr.querySelector('.sub-avg');
+        let points = 0; 
+        let coeffs = 0;
+        
+        tr.querySelectorAll('.note-entry').forEach(entry => {
+            const v = parseFloat(entry.querySelector('.val').value);
+            const b = parseFloat(entry.querySelector('.base').value);
+            const c = parseFloat(entry.querySelector('.coeff').value);
+            if(!isNaN(v) && b > 0 && c > 0) {
+                points += (v / b * 20) * c;
+                coeffs += c;
+            }
+        });
+
+        if(coeffs > 0) {
+            let m = points / coeffs;
+            subAvgSpan.innerText = m.toFixed(2);
+            totalGeneral += m; 
+            nbMatieres++;
+        } else { 
+            subAvgSpan.innerText = "--"; 
+        }
+    });
+    
+    const globalAvg = document.getElementById('total-avg');
+    if(nbMatieres > 0) {
+        globalAvg.innerText = (totalGeneral / nbMatieres).toFixed(2) + "/20";
+    } else {
+        globalAvg.innerText = "--";
+    }
+}
 </script>    
 <head>
     <meta charset="UTF-8">
