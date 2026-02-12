@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRONOTE | Connexion Sécurisée</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --google-border: #dadce0;
+        }
+
+        body.login-bg {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-login {
+            font-size: 28px;
+            font-weight: 800;
+            color: #2c3e50;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #636e72;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* Bouton Google */
+        .btn-google {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #3c4043;
+            border: 1px solid var(--google-border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-google:hover {
+            background: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-google img { width: 18px; }
+
+        /* Séparateur */
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #b2bec3;
+            font-size: 12px;
+            margin: 25px 0;
+        }
+
+        .separator::before, .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dfe6e9;
+        }
+        .separator:not(:empty)::before { margin-right: 1em; }
+        .separator:not(:empty)::after { margin-left: 1em; }
+
+        /* Formulaire */
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover { background: #2980b9; }
+
+        .footer-links {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #636e72;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="login-bg">
+
+    <div class="login-card">
+        <div class="logo-login">PRONOTE</div>
+        <div class="subtitle">Espace Élèves & Parents</div>
+        
+        <button type="button" class="btn-google" onclick="handleGoogleLogin()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google__G__Logo.svg" alt="Google">
+            Continuer avec Google
+        </button>
+
+        <div class="separator">OU</div>
+
+        <form id="login-form">
+            <div class="input-group">
+                <label>Identifiant ou Email</label>
+                <input type="email" id="email" placeholder="nom.prenom@ecole.fr" required>
+            </div>
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="btn-submit">SE CONNECTER</button>
+        </form>
+
+        <div class="footer-links">
+            Pas encore de compte ? <a href="#">S'inscrire</a><br>
+            <a href="#" style="font-size: 11px; margin-top: 10px; display: inline-block; color: #b2bec3;">Mot de passe oublié ?</a>
+        </div>
+    </div>
+
+    <script>
+        // Gestion de la connexion classique
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            performLogin(email, "Utilisateur Pronote");
+        });
+
+        // Gestion de la connexion Google
+        function handleGoogleLogin() {
+            performLogin("jean.dupont@gmail.com", "Jean Dupont");
+        }
+
+        // Fonction commune pour enregistrer et rediriger
+        function performLogin(email, name) {
+            localStorage.setItem('user_email', email);
+            localStorage.setItem('user_name', name);
+            localStorage.setItem('is_logged_in', 'true');
+            
+            // Animation de chargement simulée
+            const btn = document.querySelector('.btn-submit');
+            btn.innerText = "Chargement...";
+            btn.style.opacity = "0.7";
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 800);
+        }
+    </script>
+</body>
+</html>
